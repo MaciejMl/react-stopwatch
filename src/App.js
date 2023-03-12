@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import Button from './Components/Button/Button';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Timer from './Components/Timer/Timer';
 
-function App() {
+const App = () => {
+  const [time, setTime] = useState(0);
+  const [timer, setTimer] = useState(null);
+  const [timeOn, setTimeOn] = useState(false);
+
+  const startT = () => {
+    setTimeOn(true);
+  };
+
+  const stopT = () => {
+    setTimeOn(false);
+  };
+
+  const resetT = () => {
+    setTime(0);
+  };
+
+  useEffect(() => {
+    if (timeOn) {
+      setTimer(
+        setInterval(() => {
+          setTime((prevValue) => prevValue + 10);
+        }, 10)
+      );
+    } else {
+      clearInterval(timer);
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [timeOn]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='timer'>
+      <Timer miliseconds={time} />
+      <Button title='start' action={startT} />
+      <Button title='stop' action={stopT} />
+      <Button title='reset' action={resetT} />
     </div>
   );
-}
+};
 
 export default App;
