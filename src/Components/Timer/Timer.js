@@ -6,10 +6,14 @@ const Timer = ({ miliseconds }) => {
   const mm = Math.floor((ms / 1000 / 60) % 60);
   const hh = Math.floor((ms / 1000 / 60 / 60) % 24);
 
+  function formatedTime(num, targetLength) {
+    return num.toString().padStart(targetLength, '0');
+  }
+
   return (
     <div className={styles.time}>
-      {('0' + hh).slice(-2)}:{('0' + mm).slice(-2)}:{('0' + ss).slice(-2)}.
-      {('0' + ms).slice(-3)}
+      {formatedTime(hh, 2)} : {formatedTime(mm, 2)} : {formatedTime(ss, 2)} .
+      {formatedTime(ms, 1).slice(-3)}
     </div>
   );
 };
