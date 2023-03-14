@@ -12,8 +12,8 @@ const Timer = ({ miliseconds }) => {
 
   return (
     <div className={styles.time}>
-      {formatedTime(hh, 2)} : {formatedTime(mm, 2)} : {formatedTime(ss, 2)} .
-      {formatedTime(ms, 1).slice(-3)}
+      {formatedTime(hh, 2)} : {formatedTime(mm, 2)} : {formatedTime(ss, 2)} .{' '}
+      {ms % 1000}
     </div>
   );
 };
