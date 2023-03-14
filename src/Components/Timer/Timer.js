@@ -1,10 +1,15 @@
 import styles from './Timer.module.scss';
 
 const Timer = ({ miliseconds }) => {
-  const ms = miliseconds;
-  const ss = Math.floor((ms / 1000) % 60);
-  const mm = Math.floor((ms / 1000 / 60) % 60);
-  const hh = Math.floor((ms / 1000 / 60 / 60) % 24);
+  // let ms = miliseconds % 1000;
+  // let ss = Math.floor((ms / 1000) % 60);
+  // let mm = Math.floor((ms / 1000 / 60) % 60);
+  // let hh = Math.floor((ms / 1000 / 60 / 60) % 24);
+
+  const ms = Math.floor(miliseconds);
+  const ss = Math.floor((miliseconds % 6000) / 100);
+  const mm = Math.floor((miliseconds % 360000) / 6000);
+  const hh = Math.floor(miliseconds / 360000);
 
   function formatedTime(num, targetLength) {
     return num.toString().padStart(targetLength, '0');
@@ -13,7 +18,7 @@ const Timer = ({ miliseconds }) => {
   return (
     <div className={styles.time}>
       {formatedTime(hh, 2)} : {formatedTime(mm, 2)} : {formatedTime(ss, 2)} .{' '}
-      {ms % 1000}
+      {formatedTime(ms, 3)}
     </div>
   );
 };

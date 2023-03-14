@@ -24,7 +24,7 @@ const App = () => {
     if (timeOn) {
       setTimer(
         setInterval(() => {
-          setTime((prevValue) => prevValue + 10);
+          setTime((prevValue) => prevValue + 1);
         }, 10)
       );
     } else {
